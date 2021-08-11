@@ -1,0 +1,24 @@
+<!-- pages/authorized/authorized.wxml -->
+<view class='header'>
+    <image src='/images/logo3.jpg'></image>
+</view>
+<view class='content' wx:if="{{!isUserInfo}}">
+    <view>申请获取以下权限</view>
+    <text>获得你的公开信息(昵称，头像等)</text>
+</view>
+<view class='content' wx:else>
+    <view>申请获取以下权限</view>
+    <text>获得你的手机号码</text>
+</view>
+<view wx:if="{{!isUserInfo}}">
+    <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile">授权登录</button>
+    <button wx:else class='authorized_btn' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="userInfoHandler">
+        授权登录
+    </button>
+    <button class="authorized_btn yacnBtn" type="default" bindtap="cancelLogin">取消</button>
+</view>
+<view wx:else>
+    <button class='authorized_btn' type='primary' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" lang="zh_CN">
+        获取手机号
+    </button>
+</view>
