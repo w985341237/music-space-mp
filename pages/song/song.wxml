@@ -1,8 +1,1 @@
-<import src="../../wxParse/wxParse.wxml" />
-
-<!-- <view >
-    <text>这是播放页面</text>
-</view> -->
-<view>
-    <template is="wxParse" data="{{wxParseData:play.nodes}}" />
-</view>
+<mp-html content="{{html}}" />

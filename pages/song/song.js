@@ -29,11 +29,13 @@ Page({
         this.setData({
             a: "bbb"
         })
+        var _html = '<div>Hello World!</div>';
         app.request({
             url: "/room/player/index",
             success: function (res) {
-                console.log(res)
-                WxParse.wxParse('play', 'html', res, that, 5)
+                that.setData({
+                    html: res
+                })
             }
         })
     },
