@@ -20,6 +20,22 @@ App({
     userInfo: null
     },
 
+    isBlank: function (str) {
+        if (Object.prototype.toString.call(str) === "[object Undefined]") {
+            //空
+            return true;
+        } else if (
+            Object.prototype.toString.call(str) === "[object String]" ||
+            Object.prototype.toString.call(str) === "[object Array]"
+        ) {
+            //字条串或数组
+            return str.length == 0 ? true : false;
+        } else if (Object.prototype.toString.call(str) === "[object Object]") {
+            return JSON.stringify(str) == "{}" ? true : false;
+        } else {
+            return true;
+        }
+    },
     login: function () {
         //lzh需加前置判断，如果已授权,则不需要跳转；如果未授权，则跳转
         let that = this;
@@ -261,6 +277,7 @@ App({
                 console.warn("--- request success >>>");
                 console.log(res);
                 console.warn("<<< request success ---");
+                that.login();
                 if (res.data.code == -1) {
                     that.login();
                 } else if (res.data.code == 6000) {

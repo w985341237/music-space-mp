@@ -16,6 +16,25 @@ Page({
       app.pageOnLoad(this);
   },
 
+  loadData: function (options) {
+    wx.showLoading({
+      title: "正在加载",
+      mask: true,
+    });
+
+    var page = this;
+    app.request({
+      url: "/user/index",
+      success: function (res) {
+        if (res.code == 0) {
+          page.setData(res.data);
+          wx.setStorafeSync('user_indo', res.data.user_info);
+          wx.hideLoading();
+        }
+      }
+    });
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -27,7 +46,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.pageOnShow(this);
+    var page = this;
+    const user_info = wx.getStorageSync('user_info');
+    page.loadData()
   },
 
   /**

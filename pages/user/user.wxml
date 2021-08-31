@@ -1,2 +1,11 @@
-<!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<include src="/commons/extension/extension" />
+<include src="/commons/navbar/navbar" />
+<view class="after-navbar">
+		<view class="user-card flex-col " style='position:relative;'>
+
+				<view class="user-info flex-row flex-y-center">
+					<image class="avatar" src="{{user_info.avatar_url}}" />
+					<text class="user-name">{{user_info.nickname}}</text>
+				</view>
+		</view>
+</view>
