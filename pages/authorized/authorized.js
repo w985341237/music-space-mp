@@ -85,20 +85,21 @@ Page({
         method: "post",
         data: {
           code: that.data.code,
-          user_info: JSON.stringify(e.userInfo),
-          encrypted_data: e.encryptedData,
+          userInfo: JSON.stringify(e.userInfo),
+          rawData: e.rawData,
+          encryptedData: e.encryptedData,
           iv: e.iv,
           signature: e.signature,
         },
         success: function (t) {
           if ((wx.hideLoading(), 0 == t.code)) {
-            wx.setStorageSync("access_token", t.access_token),
+            wx.setStorageSync("access_token", t.header["authorization"]),
               wx.setStorageSync("user_info", {
-                nickname: t.nickname,
-                avatar_url: t.avatar_url,
-                id: t.id,
-                ss_key: t.session_key,
-                addtime: t.addtime,
+                nickname: t.data.nickname,
+                avatar_url: t.data.avatar_url,
+                id: t.data.id,
+                ss_key: t.data.session_key,
+                addtime: t.data.addtime,
               });
             wx.setStorageSync("ssKey", {
               ss_key: t.data.session_key,
