@@ -92,17 +92,18 @@ Page({
           signature: e.signature,
         },
         success: function (t) {
-          if ((wx.hideLoading(), 0 == t.code)) {
-            wx.setStorageSync("access_token", t.header["authorization"]),
+          if ((wx.hideLoading(), 0 == t.status)) {
+            wx.setStorageSync("access_token", t.data.accessToken),
               wx.setStorageSync("user_info", {
-                nickname: t.data.nickname,
-                avatar_url: t.data.avatar_url,
-                id: t.data.id,
-                ss_key: t.data.session_key,
-                addtime: t.data.addtime,
+                nickname: t.data.userInfo.nickName,
+                avatar_url: t.data.userInfo.avatarUrl,
+                id: t.data.userInfo.id,
+                ss_key: t.data.sessionKey,
+                addtime: t.data.userInfo.addTime,
+                last_login_time: t.data.userInfo.lastLoginTime,
               });
             wx.setStorageSync("ssKey", {
-              ss_key: t.data.session_key,
+              ss_key: t.data.sessionKey,
             });
 
             if (!wx.getStorageSync("user_info").mobile) {
@@ -135,7 +136,7 @@ Page({
     var page = this;
     var ss_key = wx.getStorageSync("ssKey")["ss_key"];
     app.request({
-      url: "api.user.user_phone",
+      url: "/user/bindPhone",
       method: "post",
       data: {
         encryptedData: e.detail.encryptedData,

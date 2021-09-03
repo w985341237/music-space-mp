@@ -255,11 +255,16 @@ App({
     },
     requestMain: function (object) {
         let that = this;
+        var header = object.header || {
+            "content-type": "application/x-www-form-urlencoded",
+        }
+
         if (!object.data) object.data = {};
         var access_token = wx.getStorageSync("access_token");
         if (access_token) {
-            object.data.access_token = access_token;
+            header['authorization'] = access_token;
         }
+        
         // object.data._uniacid = this.siteInfo.uniacid;
         // object.data._acid = this.siteInfo.acid;
         var _api_root = this.apiurl;
@@ -267,9 +272,7 @@ App({
         console.log("url---------" + object.url + "1111");
         wx.request({
             url: object.url,
-            header: object.header || {
-                "content-type": "application/x-www-form-urlencoded",
-            },
+            header: header,
             data: object.data || {},
             method: object.method || "GET",
             dataType: object.dataType || "json",
