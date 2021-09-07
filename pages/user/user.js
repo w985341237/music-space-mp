@@ -23,12 +23,16 @@ Page({
     });
 
     var page = this;
+    var id = wx.getStorageSync("user_info")["id"];
     app.request({
       url: "/user/index",
+      data: {
+        id: id
+      },
       success: function (res) {
         if (res.code == 0) {
           page.setData(res.data);
-          wx.setStorafeSync('user_indo', res.data.user_info);
+          wx.setStorafeSync('user_info', res.data.userInfo);
           wx.hideLoading();
         }
       }

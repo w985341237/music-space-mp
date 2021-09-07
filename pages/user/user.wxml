@@ -4,8 +4,8 @@
 		<view class="user-card flex-col " style='position:relative;'>
 
 				<view class="user-info flex-row flex-y-center">
-					<image class="avatar" src="{{user_info.avatar_url}}" />
-					<text class="user-name">{{user_info.nickname}}</text>
+					<image class="avatar" src="{{user_info.avatarUrl}}" />
+					<text class="user-name">{{user_info.nickName}}</text>
 				</view>
 		</view>
 </view>
